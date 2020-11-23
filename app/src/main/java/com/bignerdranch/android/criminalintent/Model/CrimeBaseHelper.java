@@ -1,12 +1,11 @@
-package com.bignerdranch.android.criminalintent;
+package com.bignerdranch.android.criminalintent.Model;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.annotation.Nullable;
 
 public class CrimeBaseHelper extends SQLiteOpenHelper {
-    private static final int version=1;
+    private static final int version=4;
     private static final String DATABASE_NAME="crimeBase.db";
 
     public CrimeBaseHelper(Context context) {
@@ -15,7 +14,7 @@ public class CrimeBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table "+CrimeDbSchema.CrimeTable.NAME+"("+
+        sqLiteDatabase.execSQL("create table "+ CrimeDbSchema.CrimeTable.NAME+"("+
                 "_id integer primary key autoincrement, "+
                  CrimeDbSchema.CrimeTable.Cols.UUID+", "+
                  CrimeDbSchema.CrimeTable.Cols.TITLE+", "+
@@ -26,6 +25,6 @@ public class CrimeBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        //sqLiteDatabase.execSQL("Drop Table "+CrimeDbSchema.CrimeTable.NAME);
     }
 }

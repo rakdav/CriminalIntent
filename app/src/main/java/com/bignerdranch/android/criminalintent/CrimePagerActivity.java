@@ -10,6 +10,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.bignerdranch.android.criminalintent.Model.Crime;
+import com.bignerdranch.android.criminalintent.Model.CrimeLab;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +28,7 @@ public class CrimePagerActivity extends AppCompatActivity
         setContentView(R.layout.active_crime_pager);
         UUID crimeId=(UUID)getIntent().getSerializableExtra(EXTRA_CRIME_ID);
         viewPager=(ViewPager) findViewById(R.id.crime_view_pager);
-        crimes=CrimeLab.get(this).getCrimes();
+        crimes= CrimeLab.get(this).getCrimes();
         FragmentManager fragmentManager=getSupportFragmentManager();
         viewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {
             @Override

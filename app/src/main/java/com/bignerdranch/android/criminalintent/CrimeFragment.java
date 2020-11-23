@@ -15,6 +15,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import com.bignerdranch.android.criminalintent.Model.Crime;
+import com.bignerdranch.android.criminalintent.Model.CrimeLab;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -34,7 +37,7 @@ public class CrimeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         //mCrime = new Crime();
         UUID crimeId=(UUID)getArguments().getSerializable(ARG_CRIME_ID);
-        mCrime=CrimeLab.get(getActivity()).getCrime(crimeId);
+        mCrime= CrimeLab.get(getActivity()).getCrime(crimeId);
     }
 
     public static CrimeFragment newInstance(UUID crimeId)
@@ -103,5 +106,11 @@ public class CrimeFragment extends Fragment {
             mCrime.setDate(date);
             mDateButton.setText(mCrime.getDate().toString());
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        CrimeLab.get(getActivity()).updateCrime(mCrime);
     }
 }

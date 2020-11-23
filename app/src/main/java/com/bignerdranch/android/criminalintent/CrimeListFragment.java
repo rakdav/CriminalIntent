@@ -14,7 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.bignerdranch.android.criminalintent.Model.Crime;
+import com.bignerdranch.android.criminalintent.Model.CrimeLab;
 
 import java.util.List;
 
@@ -67,6 +69,7 @@ public class CrimeListFragment extends Fragment {
             mCrimeRecyclerView.setAdapter(mAdapter);
         }
         else {
+            mAdapter.setCrimes(crimes);
             mAdapter.notifyDataSetChanged();
         }
         updateSubtitle();
@@ -127,6 +130,10 @@ public class CrimeListFragment extends Fragment {
         public int getItemCount() {
             return mCrimes.size();
         }
+        public void setCrimes(List<Crime> crimes)
+        {
+            mCrimes = crimes;
+        }
     }
 
     @Override
@@ -148,6 +155,7 @@ public class CrimeListFragment extends Fragment {
                 CrimeLab.get(getActivity()).addCrime(crime);
                 Intent intent=CrimePagerActivity.newIntent(getActivity(),crime.getId());
                 startActivity(intent);
+                mAdapter.notifyDataSetChanged();
                 return  true;
             }
             case R.id.show_subtitle:
